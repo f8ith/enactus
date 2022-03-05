@@ -16,6 +16,8 @@ import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import Dex from "../screens/Dex";
+import EventsScreen from "../screens/EventsScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import RewardsScreen from "../screens/RewardsScreen";
@@ -116,6 +118,23 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="gift" color={color} />,
         }}
       />
+      <BottomTab.Screen
+        name="Events"
+        component={EventsScreen}
+        options={{
+          title: "Events",
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Dex"
+        component={Dex}
+        options={{
+          title: "Dex",
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+        }}
+      />
+
       <BottomTab.Screen
         name="TabTwo"
         component={TabTwoScreen}

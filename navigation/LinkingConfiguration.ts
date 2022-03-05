@@ -30,6 +30,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               RewardsScreen: "rewards",
             },
           },
+          Events: {
+            screens: {
+              EventsScreen: "events",
+            },
+          },
+          Dex: {
+            screens: {
+              Dex: "dex",
+            },
+          },
         },
       },
       Modal: "modal",
