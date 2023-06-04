@@ -35,14 +35,19 @@ const linking: LinkingOptions<RootStackParamList> = {
               EventsScreen: "events",
             },
           },
-          Dex: {
+          Pet: {
             screens: {
+              Pet: "pet",
               Dex: "dex",
             },
           },
         },
       },
       Modal: "modal",
+      Dex: "dex",
+      Shop: "shop",
+      'Create Event': "create_event",
+      'Take Photo': "take_photo",
       NotFound: "*",
     },
   },

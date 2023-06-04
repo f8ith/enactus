@@ -1,7 +1,6 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
-import { Card, Button, View, Colors } from "react-native-ui-lib"
-import { Text } from "../components/Themed";
+import { Card, Button, View } from "react-native-ui-lib"
 
 
 export default function EventsScreen() {
@@ -9,14 +8,8 @@ export default function EventsScreen() {
 
   return (
     <View style={styles.container}>
-      <Button
-        style={{ marginTop: 0, margin: 20, height: 50, width: 400 }}
-        text60
-        label="Create Event"
-        size={Button.sizes.medium}
-        backgroundColor="#ff5050"
-      />
       <Card flex height={120} activeOpacity={1}>
+        <Ionicons name="ellipsis-horizontal" size={30} style={{ position: 'absolute', top: 15, right: 20 }} />
         <Card.Section content={[
           { text: 'Cleanup Event @ Tai Mo Shan', style: styles.title }
         ]} style={{ flex: 0.5, padding: 20 }} />
@@ -36,7 +29,6 @@ export default function EventsScreen() {
             size={Button.sizes.medium}
             backgroundColor="#30B650"
           />
-          <FontAwesome name="share-square-o" size={30} style={{ marginRight: 10, marginLeft: 'auto', marginTop: 10 }} />
         </View>
       </Card>
 

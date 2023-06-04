@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -16,13 +16,17 @@ import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import Dex from "../screens/Dex";
+import CreateEventScreen from "../screens/CreateEventScreen";
+import DexScreen from "../screens/DexScreen";
 import EventsScreen from "../screens/EventsScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import PetScreen from "../screens/PetScreen";
 import RewardsScreen from "../screens/RewardsScreen";
+import ShopScreen from "../screens/ShopScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
+import TakePhoto from "../screens/TakePhoto";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -66,6 +70,10 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Dex" component={DexScreen} />
+        <Stack.Screen name="Shop" component={ShopScreen} />
+        <Stack.Screen name="Create Event" component={CreateEventScreen} />
+        <Stack.Screen name="Take Photo" component={TakePhoto} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -85,14 +93,30 @@ function BottomTabNavigator() {
       initialRouteName="TabOne"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarShowLabel: false,
       }}
     >
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Home",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          title: "Map",
+          tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Take Photo")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <Ionicons
+                name="camera"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -100,8 +124,8 @@ function BottomTabNavigator() {
                 opacity: pressed ? 0.5 : 1,
               })}
             >
-              <FontAwesome
-                name="info-circle"
+              <Ionicons
+                name="information"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
@@ -121,19 +145,64 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Events"
         component={EventsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<"Events">) => ({
           title: "Events",
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
-        }}
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Create Event")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <Ionicons
+                name="add"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
       />
       <BottomTab.Screen
-        name="Dex"
-        component={Dex}
-        options={{
-          title: "Dex",
-          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
-        }}
-      />
+        name="Pet"
+        component={PetScreen}
+        options={({ navigation }: RootTabScreenProps<"Pet">) => ({
+          title: "Pet",
+          tabBarIcon: ({ color }) => <TabBarIcon name="paw" color={color} />,
+          headerLeft: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Shop")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <Ionicons
+                name="cart"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginLeft: 15 }}
+              />
+            </Pressable>
+          ),
+
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("Dex")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <Ionicons
+                name="book"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })} />
 
       <BottomTab.Screen
         name="TabTwo"
@@ -151,8 +220,8 @@ function BottomTabNavigator() {
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={25} {...props} />;
 }
